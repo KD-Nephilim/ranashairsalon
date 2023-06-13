@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="remixicons/fonts/remixicon.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="ranashairsalon.php">
+
+
+  <title>Rana's Hair Salon</title> <!-- Name of the webpage/company -->
+</head>
+
+<body id="home" data-bs-spy="scroll" data-bs-target=".navbar">
+
+    <iframe src="getBookings.php"></iframe>
+    <h1>Welcome, Admin!</h1>
+    <p>This is the admin page content.</p>
+
+    <!-- Display the bookings in a table -->
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Customer Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Service</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row['booking_id'] . "</td>";
+                    echo "<td>" . $row['customer_name'] . "</td>";
+                    echo "<td>" . $row['date'] . "</td>";
+                    echo "<td>" . $row['time'] . "</td>";
+                    echo "<td>" . $row['service'] . "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='5'>No bookings found</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+
+    <a href="logout.php">Logout</a>
+
+    <?php
+    // Close the connection
+    $conn->close();
+    ?>
+</body>
+
+</html>
